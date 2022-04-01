@@ -10,8 +10,6 @@ public class StavkaNarudzbeniceDTO {
 
     private Integer rb;
 
-    private NarudzbenicaDTO narudzbenicaDTO;
-
     private Integer kolicina;
 
     private Double cena;
@@ -24,10 +22,9 @@ public class StavkaNarudzbeniceDTO {
 
     }
 
-    public StavkaNarudzbeniceDTO(Integer brojNarudzbenice, Integer rb, NarudzbenicaDTO narudzbenicaDTO, Integer kolicina, Double cena, Double ukupnaCena, ProizvodDTO proizvodDTO) {
+    public StavkaNarudzbeniceDTO(Integer brojNarudzbenice, Integer rb, Integer kolicina, Double cena, Double ukupnaCena, ProizvodDTO proizvodDTO) {
         this.brojNarudzbenice = brojNarudzbenice;
         this.rb = rb;
-        this.narudzbenicaDTO = narudzbenicaDTO;
         this.kolicina = kolicina;
         this.cena = cena;
         this.ukupnaCena = ukupnaCena;
@@ -48,14 +45,6 @@ public class StavkaNarudzbeniceDTO {
 
     public void setRb(Integer rb) {
         this.rb = rb;
-    }
-
-    public NarudzbenicaDTO getNarudzbenicaDTO() {
-        return narudzbenicaDTO;
-    }
-
-    public void setNarudzbenicaDTO(NarudzbenicaDTO narudzbenicaDTO) {
-        this.narudzbenicaDTO = narudzbenicaDTO;
     }
 
     public Integer getKolicina() {
@@ -103,7 +92,6 @@ public class StavkaNarudzbeniceDTO {
         return "StavkaNarudzbeniceDTO{" +
                 "brojNarudzbenice=" + brojNarudzbenice +
                 ", rb=" + rb +
-                ", narudzbenicaDTO=" + narudzbenicaDTO +
                 ", kolicina=" + kolicina +
                 ", cena=" + cena +
                 ", ukupnaCena=" + ukupnaCena +
