@@ -33,7 +33,8 @@ public class NarudzbeniceFacade {
         Optional<NarudzbenicaDTO> optionalNarudzbenicaDTO = service.findById(narudzbenicaDTO.getBrojNarudzbenice());
         if (!optionalNarudzbenicaDTO.isPresent())
             throw new NarudzbeniceMicroserviceException("Ne postoji narudzbenica sa prosledjenim id-om");
-        narudzbenicaDTO.setDatumKreiranja(null);
+        NarudzbenicaDTO narudzbenicaDTOFromDb = optionalNarudzbenicaDTO.get();
+        narudzbenicaDTO.setDatumKreiranja(narudzbenicaDTOFromDb.getDatumKreiranja());
         narudzbenicaDTO.setDatumAzuriranja(LocalDateTime.now());
         narudzbenicaDTO.getStavkeNarudzbenice().forEach(it -> it.setUkupnaCena(it.getCena() * it.getKolicina()));
         for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
