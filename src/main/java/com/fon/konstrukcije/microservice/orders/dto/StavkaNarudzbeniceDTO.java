@@ -29,7 +29,7 @@ public class StavkaNarudzbeniceDTO {
     @NotNull(message = "Proizvod stavke narudzbenice ne sme biti null")
     private ProizvodDTO proizvodDTO;
 
-    public StavkaNarudzbeniceDTO(){
+    public StavkaNarudzbeniceDTO() {
 
     }
 

@@ -9,25 +9,25 @@ public class Klijent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false,unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     private Integer id;
 
-    @Column(name = "ime",nullable = false)
+    @Column(name = "ime", nullable = false)
     private String ime;
 
-    @Column(name = "prezime",nullable = false)
+    @Column(name = "prezime", nullable = false)
     private String prezime;
 
-    @Column(name = "email",nullable = false,unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "broj_telefona",nullable = false,unique = true)
+    @Column(name = "broj_telefona", nullable = false, unique = true)
     private String brojTelefona;
 
-    @Column(name = "adresa",nullable = false)
+    @Column(name = "adresa", nullable = false)
     private String adresa;
 
-    public Klijent(){
+    public Klijent() {
 
     }
 

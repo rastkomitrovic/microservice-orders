@@ -14,7 +14,7 @@ public class StavkaNarudzbeniceEmbeddedId implements Serializable {
     @Column(name = "rb", nullable = false)
     private Integer rb;
 
-    public StavkaNarudzbeniceEmbeddedId(){
+    public StavkaNarudzbeniceEmbeddedId() {
 
     }
 

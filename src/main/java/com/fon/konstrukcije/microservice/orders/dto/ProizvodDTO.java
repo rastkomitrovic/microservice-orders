@@ -16,7 +16,7 @@ public class ProizvodDTO {
 
     private JedinicaMere jedinica;
 
-    public ProizvodDTO(){
+    public ProizvodDTO() {
 
     }
 

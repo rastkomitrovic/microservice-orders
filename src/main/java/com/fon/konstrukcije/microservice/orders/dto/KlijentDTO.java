@@ -18,7 +18,7 @@ public class KlijentDTO {
 
     private String adresa;
 
-    public KlijentDTO(){
+    public KlijentDTO() {
 
     }
 

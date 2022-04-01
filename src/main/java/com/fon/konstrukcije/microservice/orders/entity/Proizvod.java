@@ -11,20 +11,20 @@ public class Proizvod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",unique = true,nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "naziv",nullable = false, unique = false)
+    @Column(name = "naziv", nullable = false, unique = false)
     private String naziv;
 
-    @Column(name = "tip_proizvoda",nullable = false)
+    @Column(name = "tip_proizvoda", nullable = false)
     private String tipProizvoda;
 
     @Column(name = "jedinica", nullable = false)
     @Enumerated(EnumType.STRING)
     private JedinicaMere jedinica;
 
-    public Proizvod(){
+    public Proizvod() {
 
     }
 

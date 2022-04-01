@@ -23,7 +23,7 @@ public class NarudzbenicaDTO {
     private List<StavkaNarudzbeniceDTO> stavkeNarudzbenice;
 
 
-    public NarudzbenicaDTO(){
+    public NarudzbenicaDTO() {
 
     }
 

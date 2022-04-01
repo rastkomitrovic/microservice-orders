@@ -24,14 +24,14 @@ public class StavkaNarudzbenice {
     @Column(name = "cena", nullable = false)
     private Double cena;
 
-    @Column(name = "ukupna_cena",nullable = false)
+    @Column(name = "ukupna_cena", nullable = false)
     private Double ukupnaCena;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "proizvod_id", nullable = false)
     private Proizvod proizvod;
 
-    public StavkaNarudzbenice(){
+    public StavkaNarudzbenice() {
 
     }
 

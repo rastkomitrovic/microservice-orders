@@ -16,7 +16,7 @@ public class Narudzbenica {
     @Column(name = "broj_narudzbenice", nullable = false, unique = true)
     private Integer brojNarudzbenice;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "klijent_id", nullable = false)
     private Klijent klijent;
 
@@ -25,18 +25,18 @@ public class Narudzbenica {
     private LocalDateTime datumKreiranja;
 
     @Basic
-    @Column(name = "datum_azuriranja",nullable = true)
+    @Column(name = "datum_azuriranja", nullable = true)
     private LocalDateTime datumAzuriranja;
 
-    @Column(name = "ukupno",nullable = false)
+    @Column(name = "ukupno", nullable = false)
     private Double ukupno;
 
-    @OneToMany(mappedBy = "id.brojNarudzbenice",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id.brojNarudzbenice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("id.rb")
     private Set<StavkaNarudzbenice> stavkeNarudzbenice;
 
 
-    public Narudzbenica(){
+    public Narudzbenica() {
 
     }
 
