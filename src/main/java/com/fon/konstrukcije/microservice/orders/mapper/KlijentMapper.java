@@ -11,12 +11,12 @@ public class KlijentMapper {
     public KlijentDTO toDTO(Klijent klijent) {
         KlijentDTO klijentDTO = new KlijentDTO();
 
-		klijentDTO.setId(klijent.getId());
-		klijentDTO.setAdresa(klijent.getAdresa());
-		klijentDTO.setBrojTelefona(klijent.getBrojTelefona());
-		klijentDTO.setEmail(klijent.getEmail());
-		klijentDTO.setIme(klijent.getIme());
-		klijentDTO.setPrezime(klijent.getPrezime());
+        klijentDTO.setId(klijent.getId());
+        klijentDTO.setAdresa(klijent.getAdresa());
+        klijentDTO.setBrojTelefona(klijent.getBrojTelefona());
+        klijentDTO.setEmail(klijent.getEmail());
+        klijentDTO.setIme(klijent.getIme());
+        klijentDTO.setPrezime(klijent.getPrezime());
 
         return klijentDTO;
     }

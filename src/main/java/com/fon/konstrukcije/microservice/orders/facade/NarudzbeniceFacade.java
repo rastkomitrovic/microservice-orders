@@ -51,13 +51,13 @@ public class NarudzbeniceFacade {
         return service.update(narudzbenicaDTO);
     }
 
-    public void calculateTotalSumAndSetSingleItemTotalSum(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException{
+    public void calculateTotalSumAndSetSingleItemTotalSum(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         Double ukupno = 0D;
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
             StavkaNarudzbeniceDTO stavka = narudzbenicaDTO.getStavkeNarudzbenice().get(i);
 
-            if(set.contains(stavka.getProizvodDTO().getId()))
+            if (set.contains(stavka.getProizvodDTO().getId()))
                 throw new NarudzbeniceMicroserviceException("Jedan proizvod se moze naci samo uokviru jedne stavke proizvoda");
             set.add(stavka.getProizvodDTO().getId());
 

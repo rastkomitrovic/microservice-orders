@@ -34,16 +34,15 @@ public class NarudzbeniceService {
     public Optional<NarudzbenicaDTO> findById(Integer id) {
         return repository.findById(id).map(mapper::toDTO);
     }
-    
+
     public Page<NarudzbenicaDTO> findPage(Pageable paging, String search) {
-    	if(search == null || search.isEmpty()) {
-    		
-    		return repository.findAll(paging).map(mapper::toDTO);
-    	}
-    	else {
-    		
-    		return repository.findAllBySearch(paging, search).map(mapper::toDTO);
-    	}
+        if (search == null || search.isEmpty()) {
+
+            return repository.findAll(paging).map(mapper::toDTO);
+        } else {
+
+            return repository.findAllBySearch(paging, search).map(mapper::toDTO);
+        }
     }
 
 }

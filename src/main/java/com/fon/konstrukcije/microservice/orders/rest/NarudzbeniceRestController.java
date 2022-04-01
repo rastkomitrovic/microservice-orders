@@ -1,6 +1,5 @@
 package com.fon.konstrukcije.microservice.orders.rest;
 
-import com.fon.konstrukcije.microservice.orders.dto.KlijentDTO;
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
 import com.fon.konstrukcije.microservice.orders.exception.NarudzbeniceMicroserviceException;
 import com.fon.konstrukcije.microservice.orders.facade.NarudzbeniceFacade;

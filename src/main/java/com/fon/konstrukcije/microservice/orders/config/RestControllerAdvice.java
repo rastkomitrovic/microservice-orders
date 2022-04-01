@@ -48,7 +48,7 @@ public class RestControllerAdvice extends ResponseEntityExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
 
-        body.put("message","Greska u parametrima API poziva");
+        body.put("message", "Greska u parametrima API poziva");
         body.put("errors", errors);
 
         logger.info("Greska u parametrima API poziva " + body, exception);
