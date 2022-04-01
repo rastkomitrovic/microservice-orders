@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
@@ -30,12 +31,14 @@ public class NarudzbeniceMapper {
         narudzbenicaDTO.setDatumAzuriranja(narudzbenica.getDatumAzuriranja());
         narudzbenicaDTO.setDatumKreiranja(narudzbenica.getDatumKreiranja());
         narudzbenicaDTO.setUkupno(narudzbenica.getUkupno());
-        narudzbenicaDTO.setStavkeNarudzbenice(narudzbenica
-                .getStavkeNarudzbenice()
-                .stream()
-                .map(this::toDTOStavka)
-                .collect(Collectors.toList()));
-        narudzbenicaDTO.setKlijent(klijentMapper.toDTO(narudzbenica.getKlijent()));
+        if(Hibernate.isInitialized(narudzbenica.getStavkeNarudzbenice()))
+            narudzbenicaDTO.setStavkeNarudzbenice(narudzbenica
+                    .getStavkeNarudzbenice()
+                    .stream()
+                    .map(this::toDTOStavka)
+                    .collect(Collectors.toList()));
+        if(Hibernate.isInitialized(narudzbenica.getKlijent()))
+            narudzbenicaDTO.setKlijent(klijentMapper.toDTO(narudzbenica.getKlijent()));
 
         return narudzbenicaDTO;
     }
@@ -47,7 +50,8 @@ public class NarudzbeniceMapper {
         stavkaNarudzbeniceDTO.setBrojNarudzbenice(stavkaNarudzbenice.getId().getBrojNarudzbenice());
         stavkaNarudzbeniceDTO.setCena(stavkaNarudzbenice.getCena());
         stavkaNarudzbeniceDTO.setKolicina(stavkaNarudzbenice.getKolicina());
-        stavkaNarudzbeniceDTO.setProizvodDTO(proizvodMapper.toDTO(stavkaNarudzbenice.getProizvod()));
+        if(Hibernate.isInitialized(stavkaNarudzbenice.getProizvod()))
+            stavkaNarudzbeniceDTO.setProizvodDTO(proizvodMapper.toDTO(stavkaNarudzbenice.getProizvod()));
         stavkaNarudzbeniceDTO.setRb(stavkaNarudzbenice.getId().getRb());
         stavkaNarudzbeniceDTO.setUkupnaCena(stavkaNarudzbenice.getUkupnaCena());
 

@@ -58,7 +58,7 @@ public class NarudzbeniceRestController {
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
     })
-    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable Integer page, Integer size, String sort, @RequestBody String search) {
+    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable Integer page,@PathVariable Integer size,@PathVariable String sort, @RequestBody(required = false) String search) {
     	return ResponseEntity.ok(facade.findPage(page, size, sort, search));
     }
 }
