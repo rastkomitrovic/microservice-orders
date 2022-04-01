@@ -4,6 +4,11 @@ import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
 import com.fon.konstrukcije.microservice.orders.dto.StavkaNarudzbeniceDTO;
 import com.fon.konstrukcije.microservice.orders.exception.NarudzbeniceMicroserviceException;
 import com.fon.konstrukcije.microservice.orders.service.NarudzbeniceService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -43,5 +48,20 @@ public class NarudzbeniceFacade {
             stavka.setUkupnaCena(stavka.getCena() * stavka.getKolicina());
         }
         return service.update(narudzbenicaDTO);
+    }
+    
+    
+    public Optional<NarudzbenicaDTO> findById(Integer id) {
+    	
+		return service.findById(id); 
+    }
+    
+    
+    public Page<NarudzbenicaDTO> findPage(Integer page, Integer size, String sortBy, String serach) {
+    	
+    	Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
+    	
+    	
+    	return service.findPage(paging, serach);
     }
 }
