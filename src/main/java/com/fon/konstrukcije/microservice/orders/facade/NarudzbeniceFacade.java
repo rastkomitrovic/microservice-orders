@@ -24,13 +24,12 @@ public class NarudzbeniceFacade {
     public NarudzbenicaDTO save(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         if (service.findById(narudzbenicaDTO.getBrojNarudzbenice()).isPresent())
             throw new NarudzbeniceMicroserviceException("Vec postoji narudzbenica sa unetim Id-om");
+
         narudzbenicaDTO.setDatumKreiranja(LocalDateTime.now());
         narudzbenicaDTO.setDatumAzuriranja(null);
-        for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
-            StavkaNarudzbeniceDTO stavka = narudzbenicaDTO.getStavkeNarudzbenice().get(i);
-            stavka.setRb(i + 1);
-            stavka.setUkupnaCena(stavka.getCena() * stavka.getKolicina());
-        }
+
+        calculateTotalSumAndSetSingleItemTotalSum(narudzbenicaDTO);
+
         return service.save(narudzbenicaDTO);
     }
 
@@ -38,30 +37,38 @@ public class NarudzbeniceFacade {
         Optional<NarudzbenicaDTO> optionalNarudzbenicaDTO = service.findById(narudzbenicaDTO.getBrojNarudzbenice());
         if (!optionalNarudzbenicaDTO.isPresent())
             throw new NarudzbeniceMicroserviceException("Ne postoji narudzbenica sa prosledjenim id-om");
+
         NarudzbenicaDTO narudzbenicaDTOFromDb = optionalNarudzbenicaDTO.get();
         narudzbenicaDTO.setDatumKreiranja(narudzbenicaDTOFromDb.getDatumKreiranja());
         narudzbenicaDTO.setDatumAzuriranja(LocalDateTime.now());
         narudzbenicaDTO.getStavkeNarudzbenice().forEach(it -> it.setUkupnaCena(it.getCena() * it.getKolicina()));
+
+        calculateTotalSumAndSetSingleItemTotalSum(narudzbenicaDTO);
+
+        return service.update(narudzbenicaDTO);
+    }
+
+    public void calculateTotalSumAndSetSingleItemTotalSum(NarudzbenicaDTO narudzbenicaDTO){
+        Double ukupno = 0D;
         for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
             StavkaNarudzbeniceDTO stavka = narudzbenicaDTO.getStavkeNarudzbenice().get(i);
             stavka.setRb(i + 1);
             stavka.setUkupnaCena(stavka.getCena() * stavka.getKolicina());
+            ukupno += stavka.getUkupnaCena();
         }
-        return service.update(narudzbenicaDTO);
+        narudzbenicaDTO.setUkupno(ukupno);
     }
-    
-    
+
+
     public Optional<NarudzbenicaDTO> findById(Integer id) {
-    	
-		return service.findById(id); 
+        return service.findById(id);
     }
-    
-    
+
+
     public Page<NarudzbenicaDTO> findPage(Integer page, Integer size, String sortBy, String serach) {
-    	
-    	Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
-    	
-    	
-    	return service.findPage(paging, serach);
+
+        Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
+
+        return service.findPage(paging, serach);
     }
 }

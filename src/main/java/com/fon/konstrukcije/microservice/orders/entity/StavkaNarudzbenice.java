@@ -27,7 +27,7 @@ public class StavkaNarudzbenice {
     @Column(name = "ukupna_cena", nullable = false)
     private Double ukupnaCena;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "proizvod_id", nullable = false)
     private Proizvod proizvod;
 

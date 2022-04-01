@@ -14,7 +14,7 @@ public class Narudzbenica {
     @Column(name = "broj_narudzbenice", nullable = false, unique = true)
     private Integer brojNarudzbenice;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "klijent_id", nullable = false)
     private Klijent klijent;
 
