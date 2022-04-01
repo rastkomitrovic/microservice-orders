@@ -1,7 +1,5 @@
 package com.fon.konstrukcije.microservice.orders.entity;
 
-import org.springframework.core.annotation.Order;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,7 +14,7 @@ public class Narudzbenica {
     @Column(name = "broj_narudzbenice", nullable = false, unique = true)
     private Integer brojNarudzbenice;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "klijent_id", nullable = false)
     private Klijent klijent;
 
@@ -34,7 +32,6 @@ public class Narudzbenica {
     @OneToMany(mappedBy = "id.brojNarudzbenice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("id.rb")
     private Set<StavkaNarudzbenice> stavkeNarudzbenice;
-
 
     public Narudzbenica() {
 

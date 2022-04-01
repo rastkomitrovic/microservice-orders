@@ -20,7 +20,7 @@ public class NarudzbeniceRestController {
     private NarudzbeniceFacade facade;
 
     @PostMapping
-    @Operation(summary = "Sacuvava novu narudzbenicu",responses = {
+    @Operation(summary = "Sacuvava novu narudzbenicu", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno sacuvana narudzbenica"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
