@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class NarudzbeniceFacade {
@@ -48,10 +51,17 @@ public class NarudzbeniceFacade {
         return service.update(narudzbenicaDTO);
     }
 
-    public void calculateTotalSumAndSetSingleItemTotalSum(NarudzbenicaDTO narudzbenicaDTO){
+    public void calculateTotalSumAndSetSingleItemTotalSum(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException{
         Double ukupno = 0D;
+        Set<Integer> set = new HashSet<>();
         for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
             StavkaNarudzbeniceDTO stavka = narudzbenicaDTO.getStavkeNarudzbenice().get(i);
+
+            if(set.contains(stavka.getProizvodDTO().getId()))
+                throw new NarudzbeniceMicroserviceException("Jedan proizvod se moze naci samo uokviru jedne stavke proizvoda");
+            set.add(stavka.getProizvodDTO().getId());
+
+            stavka.setBrojNarudzbenice(narudzbenicaDTO.getBrojNarudzbenice());
             stavka.setRb(i + 1);
             stavka.setUkupnaCena(stavka.getCena() * stavka.getKolicina());
             ukupno += stavka.getUkupnaCena();

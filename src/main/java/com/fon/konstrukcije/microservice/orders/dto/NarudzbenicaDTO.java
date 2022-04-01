@@ -1,5 +1,8 @@
 package com.fon.konstrukcije.microservice.orders.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +23,7 @@ public class NarudzbenicaDTO {
     private Double ukupno;
 
     @NotNull(message = "Stavke narudzbenice ne smeju biti null")
+    @NotEmpty(message = "Narudzbenica mora da ima barem jednu stavku")
     private List<StavkaNarudzbeniceDTO> stavkeNarudzbenice;
 
 

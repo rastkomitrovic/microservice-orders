@@ -1,12 +1,18 @@
 package com.fon.konstrukcije.microservice.orders.rest;
 
+import com.fon.konstrukcije.microservice.orders.dto.KlijentDTO;
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
 import com.fon.konstrukcije.microservice.orders.exception.NarudzbeniceMicroserviceException;
 import com.fon.konstrukcije.microservice.orders.facade.NarudzbeniceFacade;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,43 +28,58 @@ public class NarudzbeniceRestController {
     @Resource
     private NarudzbeniceFacade facade;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Sacuvava novu narudzbenicu", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno sacuvana narudzbenica"),
-            @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
-            @ApiResponse(responseCode = "500", description = "Greska na serveru")
+            @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Greska na serveru", content = @Content)
     })
     public ResponseEntity<NarudzbenicaDTO> save(@RequestBody @Valid NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         return ResponseEntity.ok(facade.save(narudzbenicaDTO));
     }
 
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Izmenjuje postojecu narudzbenicu", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno izmenjena narudzbenica"),
-            @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
-            @ApiResponse(responseCode = "500", description = "Greska na serveru")
+            @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Greska na serveru", content = @Content)
     })
     public ResponseEntity<NarudzbenicaDTO> update(@RequestBody @Valid NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         return ResponseEntity.ok(facade.update(narudzbenicaDTO));
     }
-    
-    @GetMapping("/{id}")
+
+    @GetMapping(value = "/{brojNarudzbenice}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Vraca narudzbenicu sa prosledjenim brojem narudzbenice", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno prosledjena"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
+    },
+    parameters = {
+            @Parameter(name = "brojNarudzbenice", required = true, description = "Broj narudzbenice za pronaci", schema = @Schema(implementation = Integer.class), example = "1")
     })
-    public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable Integer id) {
-    	return ResponseEntity.ok(facade.findById(id));
+    public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable Integer brojNarudzbenice) {
+        return ResponseEntity.ok(facade.findById(brojNarudzbenice));
     }
-    
-    @GetMapping("/{page}/{size}/{sort}")
+
+    @GetMapping(value = "/{page}/{size}/{sort}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Vraca narudzbenice po paginaciji po prosledjenom parametru", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno prosledjena"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
+    },
+    parameters = {
+            @Parameter(name = "page", required = true, description = "Redni broj stranice (krece od 0 pa na dalje)", schema = @Schema(implementation = Integer.class), example = "0"),
+            @Parameter(name = "size", required = true, description = "Broj elemenata po stranici", schema = @Schema(implementation = Integer.class), example = "2"),
+            @Parameter(name = "sort", required = true, description = "Polje po kom sortiramo", schema = @Schema(implementation = String.class), examples = {
+                    @ExampleObject(name = "Broj narudzbenice", value = "brojNarudzbenice"),
+                    @ExampleObject(name = "Klijent", value = "klijent"),
+                    @ExampleObject(name ="Datum kreiranja", value = "datumKreiranja"),
+                    @ExampleObject(name = "Datum azuriranja", value = "datumAzuriranja"),
+                    @ExampleObject(name = "Ukupno", value = "ukupno"),
+                    @ExampleObject(name = "Stavke narudzbenice", value = "stavkeNarudzbenice")
+            }),
     })
-    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable Integer page,@PathVariable Integer size,@PathVariable String sort, @RequestBody(required = false) String search) {
-    	return ResponseEntity.ok(facade.findPage(page, size, sort, search));
+    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable Integer page, @PathVariable Integer size, @PathVariable String sort, @RequestParam(required = false, defaultValue = "") String search) {
+        return ResponseEntity.ok(facade.findPage(page, size, sort, search));
     }
 }
