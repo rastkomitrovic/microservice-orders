@@ -54,31 +54,31 @@ public class NarudzbeniceRestController {
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
     },
-    parameters = {
-            @Parameter(name = "brojNarudzbenice", required = true, description = "Broj narudzbenice za pronaci", schema = @Schema(implementation = Integer.class), example = "1")
-    })
+            parameters = {
+                    @Parameter(name = "brojNarudzbenice", required = true, description = "Broj narudzbenice za pronaci", schema = @Schema(implementation = Integer.class), example = "1")
+            })
     public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable Integer brojNarudzbenice) {
         return ResponseEntity.ok(facade.findById(brojNarudzbenice));
     }
 
-    @GetMapping(value = "/{page}/{size}/{sort}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{page}/{size}/{sort:brojNarudzbenice|klijent|datumKreiranja|datumAzuriranja|ukupno}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Vraca narudzbenice po paginaciji po prosledjenom parametru", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno prosledjena"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
     },
-    parameters = {
-            @Parameter(name = "page", required = true, description = "Redni broj stranice (krece od 0 pa na dalje)", schema = @Schema(implementation = Integer.class), example = "0"),
-            @Parameter(name = "size", required = true, description = "Broj elemenata po stranici", schema = @Schema(implementation = Integer.class), example = "2"),
-            @Parameter(name = "sort", required = true, description = "Polje po kom sortiramo", schema = @Schema(implementation = String.class), examples = {
-                    @ExampleObject(name = "Broj narudzbenice", value = "brojNarudzbenice"),
-                    @ExampleObject(name = "Klijent", value = "klijent"),
-                    @ExampleObject(name ="Datum kreiranja", value = "datumKreiranja"),
-                    @ExampleObject(name = "Datum azuriranja", value = "datumAzuriranja"),
-                    @ExampleObject(name = "Ukupno", value = "ukupno"),
-                    @ExampleObject(name = "Stavke narudzbenice", value = "stavkeNarudzbenice")
-            }),
-    })
+            parameters = {
+                    @Parameter(name = "page", required = true, description = "Redni broj stranice (krece od 0 pa na dalje)", schema = @Schema(implementation = Integer.class), example = "0"),
+                    @Parameter(name = "size", required = true, description = "Broj elemenata po stranici", schema = @Schema(implementation = Integer.class), example = "2"),
+                    @Parameter(name = "sort", required = true, description = "Polje po kom se sortira", schema = @Schema(implementation = String.class), examples = {
+                            @ExampleObject(name = "Broj narudzbenice", value = "brojNarudzbenice", description = "Sortiranje po broju narudzbenice u rastucem redosledu"),
+                            @ExampleObject(name = "Klijent", value = "klijent", description = "Sortiranje po ID-u klijenta u rastucem redosledu"),
+                            @ExampleObject(name = "Datum kreiranja", value = "datumKreiranja", description = "Sortiranje po datumu kreiranja narudzbine u rastucem redosledu"),
+                            @ExampleObject(name = "Datum azuriranja", value = "datumAzuriranja", description = "Sortiranje po datumu azuriranja porudzbine u rastucem redsoledu"),
+                            @ExampleObject(name = "Ukupno", value = "ukupno", description = "Sortiranje po ukupnoj sumi porudzbine u rastucem redosledu"),
+                    }),
+                    @Parameter(name = "search", required = false, description = "Parametar po kom se pretrazuje", schema = @Schema(implementation = String.class), example = "Ivan Cukic")
+            })
     public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable Integer page, @PathVariable Integer size, @PathVariable String sort, @RequestParam(required = false, defaultValue = "") String search) {
         return ResponseEntity.ok(facade.findPage(page, size, sort, search));
     }
