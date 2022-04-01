@@ -1,24 +1,29 @@
 package com.fon.konstrukcije.microservice.orders.dto;
 
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class StavkaNarudzbeniceDTO {
 
     @NotNull(message = "Broj narudzbenice u stavci narudzbenici ne sme biti null")
+    @Min(value = 1, message = "Broj narudzbenice mora biti minimum 1")
     private Integer brojNarudzbenice;
 
     @NotNull(message = "Redni broj narudzbenice u stavci narudzbenice ne sme biti null")
     private Integer rb;
 
     @NotNull(message = "Kolicina u stavci narudzbenice ne sme biti null")
+    @Min(value = 1, message = "Kolicina mora biti minimum 1")
     private Integer kolicina;
 
     @NotNull(message = "Cena u stavci narudzbenice ne sme biti null")
+    @Min(value = 1, message = "Cena mora biti minimum 1")
     private Double cena;
 
     @NotNull(message = "Ukupna cena stavke narudzbenice ne sme biti null")
+    @Min(value = 1, message = "Ukupna cena mora biti barem 1")
     private Double ukupnaCena;
 
     @NotNull(message = "Proizvod stavke narudzbenice ne sme biti null")

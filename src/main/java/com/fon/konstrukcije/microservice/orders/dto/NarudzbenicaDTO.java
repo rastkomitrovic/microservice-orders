@@ -2,8 +2,8 @@ package com.fon.konstrukcije.microservice.orders.dto;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class NarudzbenicaDTO {
 
@@ -17,18 +17,17 @@ public class NarudzbenicaDTO {
 
     private LocalDateTime datumAzuriranja;
 
-    @NotNull(message = "Ukupna suma narudzbenice ne sme biti null")
     private Double ukupno;
 
     @NotNull(message = "Stavke narudzbenice ne smeju biti null")
-    private Set<StavkaNarudzbeniceDTO> stavkeNarudzbenice;
+    private List<StavkaNarudzbeniceDTO> stavkeNarudzbenice;
 
 
     public NarudzbenicaDTO(){
 
     }
 
-    public NarudzbenicaDTO(Integer brojNarudzbenice, KlijentDTO klijent, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, Set<StavkaNarudzbeniceDTO> stavkeNarudzbenice) {
+    public NarudzbenicaDTO(Integer brojNarudzbenice, KlijentDTO klijent, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, List<StavkaNarudzbeniceDTO> stavkeNarudzbenice) {
         this.brojNarudzbenice = brojNarudzbenice;
         this.klijent = klijent;
         this.datumKreiranja = datumKreiranja;
@@ -77,11 +76,11 @@ public class NarudzbenicaDTO {
         this.ukupno = ukupno;
     }
 
-    public Set<StavkaNarudzbeniceDTO> getStavkeNarudzbenice() {
+    public List<StavkaNarudzbeniceDTO> getStavkeNarudzbenice() {
         return stavkeNarudzbenice;
     }
 
-    public void setStavkeNarudzbenice(Set<StavkaNarudzbeniceDTO> stavkeNarudzbenice) {
+    public void setStavkeNarudzbenice(List<StavkaNarudzbeniceDTO> stavkeNarudzbenice) {
         this.stavkeNarudzbenice = stavkeNarudzbenice;
     }
 
