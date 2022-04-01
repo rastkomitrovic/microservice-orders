@@ -15,7 +15,7 @@ public interface NarudzbeniceRepository extends PagingAndSortingRepository<Narud
 	Page<Narudzbenica> findAllBySearch(Pageable paging, String search);
 	
 	@Override
-	@Query("SELECT n from Narudzbenica n join fetch n.klijent join fetch n.stavkeNarudzbenice WHERE n.brojNarudzbenice = id")
+	@Query("SELECT n from Narudzbenica n join fetch n.klijent join fetch n.stavkeNarudzbenice WHERE n.brojNarudzbenice =:id")
 	Optional<Narudzbenica> findById(Integer id);
 }
  
