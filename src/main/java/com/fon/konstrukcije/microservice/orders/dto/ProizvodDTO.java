@@ -2,11 +2,12 @@ package com.fon.konstrukcije.microservice.orders.dto;
 
 import com.fon.konstrukcije.microservice.orders.entity.eum.JedinicaMere;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class ProizvodDTO {
 
+    @NotNull(message = "Id proizvoda ne sme biti null")
     private Integer id;
 
     private String naziv;

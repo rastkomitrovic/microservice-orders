@@ -1,21 +1,27 @@
 package com.fon.konstrukcije.microservice.orders.dto;
 
-import com.fon.konstrukcije.microservice.orders.entity.embedded.StavkaNarudzbeniceEmbeddedId;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class StavkaNarudzbeniceDTO {
 
+    @NotNull(message = "Broj narudzbenice u stavci narudzbenici ne sme biti null")
     private Integer brojNarudzbenice;
 
+    @NotNull(message = "Redni broj narudzbenice u stavci narudzbenice ne sme biti null")
     private Integer rb;
 
+    @NotNull(message = "Kolicina u stavci narudzbenice ne sme biti null")
     private Integer kolicina;
 
+    @NotNull(message = "Cena u stavci narudzbenice ne sme biti null")
     private Double cena;
 
+    @NotNull(message = "Ukupna cena stavke narudzbenice ne sme biti null")
     private Double ukupnaCena;
 
+    @NotNull(message = "Proizvod stavke narudzbenice ne sme biti null")
     private ProizvodDTO proizvodDTO;
 
     public StavkaNarudzbeniceDTO(){

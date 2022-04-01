@@ -16,6 +16,10 @@ public class Narudzbenica {
     @Column(name = "broj_narudzbenice", nullable = false, unique = true)
     private Integer brojNarudzbenice;
 
+    @ManyToOne
+    @JoinColumn(name = "klijent_id", nullable = false)
+    private Klijent klijent;
+
     @Basic
     @Column(name = "datum_kreiranja", nullable = false)
     private LocalDateTime datumKreiranja;
@@ -36,8 +40,9 @@ public class Narudzbenica {
 
     }
 
-    public Narudzbenica(Integer brojNarudzbenice, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, Set<StavkaNarudzbenice> stavkeNarudzbenice) {
+    public Narudzbenica(Integer brojNarudzbenice, Klijent klijent, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, Set<StavkaNarudzbenice> stavkeNarudzbenice) {
         this.brojNarudzbenice = brojNarudzbenice;
+        this.klijent = klijent;
         this.datumKreiranja = datumKreiranja;
         this.datumAzuriranja = datumAzuriranja;
         this.ukupno = ukupno;
@@ -50,6 +55,14 @@ public class Narudzbenica {
 
     public void setBrojNarudzbenice(Integer brojNarudzbenice) {
         this.brojNarudzbenice = brojNarudzbenice;
+    }
+
+    public Klijent getKlijent() {
+        return klijent;
+    }
+
+    public void setKlijent(Klijent klijent) {
+        this.klijent = klijent;
     }
 
     public LocalDateTime getDatumKreiranja() {

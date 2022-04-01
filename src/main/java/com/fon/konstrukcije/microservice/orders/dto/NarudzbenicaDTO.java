@@ -1,19 +1,26 @@
 package com.fon.konstrukcije.microservice.orders.dto;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
 public class NarudzbenicaDTO {
 
+    @NotNull(message = "Broj narudzbenice ne sme biti null")
     private Integer brojNarudzbenice;
+
+    @NotNull(message = "Klijent narudzbenice ne sme biti null")
+    private KlijentDTO klijent;
 
     private LocalDateTime datumKreiranja;
 
     private LocalDateTime datumAzuriranja;
 
+    @NotNull(message = "Ukupna suma narudzbenice ne sme biti null")
     private Double ukupno;
 
+    @NotNull(message = "Stavke narudzbenice ne smeju biti null")
     private Set<StavkaNarudzbeniceDTO> stavkeNarudzbenice;
 
 
@@ -21,8 +28,9 @@ public class NarudzbenicaDTO {
 
     }
 
-    public NarudzbenicaDTO(Integer brojNarudzbenice, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, Set<StavkaNarudzbeniceDTO> stavkeNarudzbenice) {
+    public NarudzbenicaDTO(Integer brojNarudzbenice, KlijentDTO klijent, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, Set<StavkaNarudzbeniceDTO> stavkeNarudzbenice) {
         this.brojNarudzbenice = brojNarudzbenice;
+        this.klijent = klijent;
         this.datumKreiranja = datumKreiranja;
         this.datumAzuriranja = datumAzuriranja;
         this.ukupno = ukupno;
@@ -35,6 +43,14 @@ public class NarudzbenicaDTO {
 
     public void setBrojNarudzbenice(Integer brojNarudzbenice) {
         this.brojNarudzbenice = brojNarudzbenice;
+    }
+
+    public KlijentDTO getKlijent() {
+        return klijent;
+    }
+
+    public void setKlijent(KlijentDTO klijent) {
+        this.klijent = klijent;
     }
 
     public LocalDateTime getDatumKreiranja() {

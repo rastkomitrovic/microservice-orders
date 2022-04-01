@@ -1,9 +1,11 @@
 package com.fon.konstrukcije.microservice.orders.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class KlijentDTO {
 
+    @NotNull(message = "Id klijenta ne sme biti null")
     private Integer id;
 
     private String ime;
