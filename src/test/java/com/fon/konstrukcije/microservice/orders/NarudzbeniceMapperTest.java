@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.hibernate.Hibernate;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -40,6 +41,7 @@ public class NarudzbeniceMapperTest {
 		MockitoAnnotations.initMocks(this);
 	}
 	
+	@Test
 	public void toDTOTest() {
 		
 		NarudzbenicaDTO narudzbenicaDTOTest = new NarudzbenicaDTO();
@@ -82,6 +84,7 @@ public class NarudzbeniceMapperTest {
         return stavkaNarudzbeniceDTO;
     }
 	
+	@Test
 	public void toEntityTest() {
 		
 		Narudzbenica narudzbenicaTest = new Narudzbenica();
