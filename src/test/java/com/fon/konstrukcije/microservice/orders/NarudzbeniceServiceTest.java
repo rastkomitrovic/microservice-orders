@@ -1,9 +1,12 @@
 package com.fon.konstrukcije.microservice.orders;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +57,54 @@ public class NarudzbeniceServiceTest {
 		
 		
 		when(narudzbeniceRepository.save(narudzbenicaTest)).thenReturn(narudzbenicaTest);
+	}
+	
+	@Test
+	public void findByIdTest() {
+		
+		Narudzbenica narudzbenicaTest = new Narudzbenica();
+		Klijent klijentTest = new Klijent(150, "Dusko", "Dusic", "dule@mail.com", "06571124", "Poznata Adresa");
+		Proizvod proizvodTest = new Proizvod(21, "P1", "Tester", JedinicaMere.KOMAD);
+		StavkaNarudzbeniceEmbeddedId embeddedIdTest = new StavkaNarudzbeniceEmbeddedId(25, 1);
+		Set<StavkaNarudzbenice> stavkeNarudzbeniceTest = new HashSet<>();
+		
+		StavkaNarudzbenice stavkaNarudzbeniceTest1 = new StavkaNarudzbenice(embeddedIdTest, narudzbenicaTest, 5, 50.0, 250.0, proizvodTest);
+		stavkeNarudzbeniceTest.add(stavkaNarudzbeniceTest1);
+		
+		narudzbenicaTest.setBrojNarudzbenice(100);
+		narudzbenicaTest.setDatumKreiranja(LocalDateTime.now());
+		narudzbenicaTest.setDatumAzuriranja(LocalDateTime.now().plusHours(1));
+		narudzbenicaTest.setKlijent(klijentTest);
+		narudzbenicaTest.setStavkeNarudzbenice(stavkeNarudzbeniceTest);
+		
+		when(narudzbeniceRepository.findById(anyInt())).thenReturn(Optional.of(narudzbenicaTest));
+	}
+	
+	@Test
+	public void updatetest() { // PROVERITI DA LI JE DOBRO
+		
+		Narudzbenica narudzbenicaTest = new Narudzbenica();
+		Klijent klijentTest = new Klijent(150, "Dusko", "Dusic", "dule@mail.com", "06571124", "Poznata Adresa");
+		Proizvod proizvodTest = new Proizvod(21, "P1", "Tester", JedinicaMere.KOMAD);
+		StavkaNarudzbeniceEmbeddedId embeddedIdTest = new StavkaNarudzbeniceEmbeddedId(25, 1);
+		Set<StavkaNarudzbenice> stavkeNarudzbeniceTest = new HashSet<>();
+		
+		StavkaNarudzbenice stavkaNarudzbeniceTest1 = new StavkaNarudzbenice(embeddedIdTest, narudzbenicaTest, 5, 50.0, 250.0, proizvodTest);
+		stavkeNarudzbeniceTest.add(stavkaNarudzbeniceTest1);
+		
+		narudzbenicaTest.setBrojNarudzbenice(100);
+		narudzbenicaTest.setDatumKreiranja(LocalDateTime.now());
+		narudzbenicaTest.setDatumAzuriranja(LocalDateTime.now().plusHours(1));
+		narudzbenicaTest.setKlijent(klijentTest);
+		narudzbenicaTest.setStavkeNarudzbenice(stavkeNarudzbeniceTest);
+		
+		when(narudzbeniceRepository.findById(anyInt())).thenReturn(Optional.of(narudzbeniceRepository.save(narudzbenicaTest)));
+	}
+	
+	@Test
+	public void findPageTest() {
+		
+		//when(narudzbeniceRepository.findAllBySearch(null, anyString()))
 	}
 
 }
