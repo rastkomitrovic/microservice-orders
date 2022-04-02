@@ -9,6 +9,8 @@ import com.fon.konstrukcije.microservice.orders.entity.Proizvod;
 public class ProizvodMapper {
 
     public ProizvodDTO toDTO(Proizvod proizvod) {
+        if (proizvod == null)
+            return null;
         ProizvodDTO proizvodDTO = new ProizvodDTO();
 
         proizvodDTO.setId(proizvod.getId());
@@ -19,13 +21,16 @@ public class ProizvodMapper {
         return proizvodDTO;
     }
 
-    public Proizvod toEntity(ProizvodDTO dto) {
+    public Proizvod toEntity(ProizvodDTO proizvodDTO) {
+        if (proizvodDTO == null)
+            return null;
+
         Proizvod proizvod = new Proizvod();
 
-        proizvod.setId(dto.getId());
-        proizvod.setJedinica(dto.getJedinica());
-        proizvod.setNaziv(dto.getNaziv());
-        proizvod.setTipProizvoda(dto.getTipProizvoda());
+        proizvod.setId(proizvodDTO.getId());
+        proizvod.setJedinica(proizvodDTO.getJedinica());
+        proizvod.setNaziv(proizvodDTO.getNaziv());
+        proizvod.setTipProizvoda(proizvodDTO.getTipProizvoda());
 
         return proizvod;
     }

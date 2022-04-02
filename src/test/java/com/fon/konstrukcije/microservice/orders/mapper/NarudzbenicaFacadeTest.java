@@ -1,12 +1,10 @@
-package com.fon.konstrukcije.microservice.orders;
+package com.fon.konstrukcije.microservice.orders.mapper;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +26,7 @@ public class NarudzbenicaFacadeTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.openMocks(this);
 	}
 	
 	@Test
@@ -39,10 +37,10 @@ public class NarudzbenicaFacadeTest {
 		ProizvodDTO proizvodDTOTest = new ProizvodDTO(21, "P1", "Tester", JedinicaMere.KOMAD);
 		
 		StavkaNarudzbeniceEmbeddedId embeddedIdTest = new StavkaNarudzbeniceEmbeddedId(25, 1);
-		Set<StavkaNarudzbeniceDTO> stavkaNarudzbeniceDTOTests = new HashSet<>();
+		List<StavkaNarudzbeniceDTO> stavkaNarudzbeniceDTOTests = new LinkedList<>();
 		
 		// MISLIM DA ME ZEZA KOD EQUALS
-		StavkaNarudzbeniceDTO stavkaNarudzbeniceDTOTest = new StavkaNarudzbeniceDTO(5, 1, 12, 3, 36, proizvodDTOTest);
+		StavkaNarudzbeniceDTO stavkaNarudzbeniceDTOTest = new StavkaNarudzbeniceDTO(5, 1, 12, 3D, 36D, proizvodDTOTest);
 		stavkaNarudzbeniceDTOTests.add(stavkaNarudzbeniceDTOTest);
 		
 		narudzbenicaDTOTest.setBrojNarudzbenice(100);
@@ -63,10 +61,10 @@ public class NarudzbenicaFacadeTest {
 		ProizvodDTO proizvodDTOTest = new ProizvodDTO(21, "P1", "Tester", JedinicaMere.KOMAD);
 		
 		StavkaNarudzbeniceEmbeddedId embeddedIdTest = new StavkaNarudzbeniceEmbeddedId(25, 1);
-		Set<StavkaNarudzbeniceDTO> stavkaNarudzbeniceDTOTests = new HashSet<>();
+		List<StavkaNarudzbeniceDTO> stavkaNarudzbeniceDTOTests = new LinkedList<>();
 		
 		// MISLIM DA ME ZEZA KOD EQUALS
-		StavkaNarudzbeniceDTO stavkaNarudzbeniceDTOTest = new StavkaNarudzbeniceDTO(5, 1, 12, 3, 36, proizvodDTOTest);
+		StavkaNarudzbeniceDTO stavkaNarudzbeniceDTOTest = new StavkaNarudzbeniceDTO(5, 1, 12, 3D, 36D, proizvodDTOTest);
 		stavkaNarudzbeniceDTOTests.add(stavkaNarudzbeniceDTOTest);
 		
 		narudzbenicaDTOTest.setBrojNarudzbenice(100);
@@ -86,10 +84,10 @@ public class NarudzbenicaFacadeTest {
 		ProizvodDTO proizvodDTOTest = new ProizvodDTO(21, "P1", "Tester", JedinicaMere.KOMAD);
 		
 		StavkaNarudzbeniceEmbeddedId embeddedIdTest = new StavkaNarudzbeniceEmbeddedId(25, 1);
-		Set<StavkaNarudzbeniceDTO> stavkaNarudzbeniceDTOTests = new HashSet<>();
+		List<StavkaNarudzbeniceDTO> stavkaNarudzbeniceDTOTests = new LinkedList<>();
 		
 		// MISLIM DA ME ZEZA KOD EQUALS
-		StavkaNarudzbeniceDTO stavkaNarudzbeniceDTOTest = new StavkaNarudzbeniceDTO(5, 1, 12, 3, 36, proizvodDTOTest);
+		StavkaNarudzbeniceDTO stavkaNarudzbeniceDTOTest = new StavkaNarudzbeniceDTO(5, 1, 12, 3D, 36D, proizvodDTOTest);
 		stavkaNarudzbeniceDTOTests.add(stavkaNarudzbeniceDTOTest);
 		
 		narudzbenicaDTOTest.setBrojNarudzbenice(100);

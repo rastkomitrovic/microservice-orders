@@ -9,6 +9,9 @@ import com.fon.konstrukcije.microservice.orders.entity.Klijent;
 public class KlijentMapper {
 
     public KlijentDTO toDTO(Klijent klijent) {
+        if (klijent == null)
+            return null;
+
         KlijentDTO klijentDTO = new KlijentDTO();
 
         klijentDTO.setId(klijent.getId());
@@ -21,15 +24,18 @@ public class KlijentMapper {
         return klijentDTO;
     }
 
-    public Klijent toEntity(KlijentDTO dto) {
+    public Klijent toEntity(KlijentDTO klijentDTO) {
+        if (klijentDTO == null)
+            return null;
+
         Klijent klijent = new Klijent();
 
-        klijent.setId(dto.getId());
-        klijent.setAdresa(dto.getAdresa());
-        klijent.setBrojTelefona(dto.getBrojTelefona());
-        klijent.setEmail(dto.getEmail());
-        klijent.setIme(dto.getIme());
-        klijent.setPrezime(dto.getPrezime());
+        klijent.setId(klijentDTO.getId());
+        klijent.setAdresa(klijentDTO.getAdresa());
+        klijent.setBrojTelefona(klijentDTO.getBrojTelefona());
+        klijent.setEmail(klijentDTO.getEmail());
+        klijent.setIme(klijentDTO.getIme());
+        klijent.setPrezime(klijentDTO.getPrezime());
 
         return klijent;
     }
