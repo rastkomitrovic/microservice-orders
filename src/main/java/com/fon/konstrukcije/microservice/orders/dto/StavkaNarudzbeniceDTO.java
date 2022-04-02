@@ -27,19 +27,19 @@ public class StavkaNarudzbeniceDTO {
     private Double ukupnaCena;
 
     @NotNull(message = "Proizvod stavke narudzbenice ne sme biti null")
-    private ProizvodDTO proizvodDTO;
+    private ProizvodDTO proizvod;
 
     public StavkaNarudzbeniceDTO() {
 
     }
 
-    public StavkaNarudzbeniceDTO(Integer brojNarudzbenice, Integer rb, Integer kolicina, Double cena, Double ukupnaCena, ProizvodDTO proizvodDTO) {
+    public StavkaNarudzbeniceDTO(Integer brojNarudzbenice, Integer rb, Integer kolicina, Double cena, Double ukupnaCena, ProizvodDTO proizvod) {
         this.brojNarudzbenice = brojNarudzbenice;
         this.rb = rb;
         this.kolicina = kolicina;
         this.cena = cena;
         this.ukupnaCena = ukupnaCena;
-        this.proizvodDTO = proizvodDTO;
+        this.proizvod = proizvod;
     }
 
     public Integer getBrojNarudzbenice() {
@@ -82,12 +82,12 @@ public class StavkaNarudzbeniceDTO {
         this.ukupnaCena = ukupnaCena;
     }
 
-    public ProizvodDTO getProizvodDTO() {
-        return proizvodDTO;
+    public ProizvodDTO getProizvod() {
+        return proizvod;
     }
 
-    public void setProizvodDTO(ProizvodDTO proizvodDTO) {
-        this.proizvodDTO = proizvodDTO;
+    public void setProizvod(ProizvodDTO proizvod) {
+        this.proizvod = proizvod;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class StavkaNarudzbeniceDTO {
                 ", kolicina=" + kolicina +
                 ", cena=" + cena +
                 ", ukupnaCena=" + ukupnaCena +
-                ", proizvodDTO=" + proizvodDTO +
+                ", proizvodDTO=" + proizvod +
                 '}';
     }
 }

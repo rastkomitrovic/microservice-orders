@@ -22,6 +22,9 @@ public class NarudzbeniceMapper {
 
 
     public NarudzbenicaDTO toDTO(Narudzbenica narudzbenica) {
+        if (narudzbenica == null)
+            return null;
+
         NarudzbenicaDTO narudzbenicaDTO = new NarudzbenicaDTO();
 
         narudzbenicaDTO.setBrojNarudzbenice(narudzbenica.getBrojNarudzbenice());
@@ -34,13 +37,14 @@ public class NarudzbeniceMapper {
                     .stream()
                     .map(this::toDTOStavka)
                     .collect(Collectors.toList()));
-        if (Hibernate.isInitialized(narudzbenica.getKlijent()))
-            narudzbenicaDTO.setKlijent(klijentMapper.toDTO(narudzbenica.getKlijent()));
+        narudzbenicaDTO.setKlijent(klijentMapper.toDTO(narudzbenica.getKlijent()));
 
         return narudzbenicaDTO;
     }
 
     private StavkaNarudzbeniceDTO toDTOStavka(StavkaNarudzbenice stavkaNarudzbenice) {
+        if (stavkaNarudzbenice == null)
+            return null;
 
         StavkaNarudzbeniceDTO stavkaNarudzbeniceDTO = new StavkaNarudzbeniceDTO();
 
@@ -48,7 +52,7 @@ public class NarudzbeniceMapper {
         stavkaNarudzbeniceDTO.setCena(stavkaNarudzbenice.getCena());
         stavkaNarudzbeniceDTO.setKolicina(stavkaNarudzbenice.getKolicina());
         if (Hibernate.isInitialized(stavkaNarudzbenice.getProizvod()))
-            stavkaNarudzbeniceDTO.setProizvodDTO(proizvodMapper.toDTO(stavkaNarudzbenice.getProizvod()));
+            stavkaNarudzbeniceDTO.setProizvod(proizvodMapper.toDTO(stavkaNarudzbenice.getProizvod()));
         stavkaNarudzbeniceDTO.setRb(stavkaNarudzbenice.getId().getRb());
         stavkaNarudzbeniceDTO.setUkupnaCena(stavkaNarudzbenice.getUkupnaCena());
 
@@ -56,6 +60,8 @@ public class NarudzbeniceMapper {
     }
 
     public Narudzbenica toEntity(NarudzbenicaDTO narudzbenicaDTO) {
+        if (narudzbenicaDTO == null)
+            return null;
 
         Narudzbenica narudzbenica = new Narudzbenica();
 
@@ -68,7 +74,7 @@ public class NarudzbeniceMapper {
                 .getStavkeNarudzbenice()
                 .stream()
                 .map(it -> toEntityStavka(it, narudzbenica))
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toList()));
         narudzbenica.setUkupno(narudzbenicaDTO.getUkupno());
 
         return narudzbenica;
@@ -76,6 +82,8 @@ public class NarudzbeniceMapper {
 
 
     private StavkaNarudzbenice toEntityStavka(StavkaNarudzbeniceDTO stavkaNarudzbeniceDTO, Narudzbenica narudzbenica) {
+        if (stavkaNarudzbeniceDTO == null)
+            return null;
 
         StavkaNarudzbenice stavkaNarudzbenice = new StavkaNarudzbenice();
         StavkaNarudzbeniceEmbeddedId embeddedId = new StavkaNarudzbeniceEmbeddedId();
@@ -87,7 +95,7 @@ public class NarudzbeniceMapper {
         stavkaNarudzbenice.setId(embeddedId);
         stavkaNarudzbenice.setNarudzbenica(narudzbenica);
         stavkaNarudzbenice.setKolicina(stavkaNarudzbeniceDTO.getKolicina());
-        stavkaNarudzbenice.setProizvod(proizvodMapper.toEntity(stavkaNarudzbeniceDTO.getProizvodDTO()));
+        stavkaNarudzbenice.setProizvod(proizvodMapper.toEntity(stavkaNarudzbeniceDTO.getProizvod()));
         stavkaNarudzbenice.setUkupnaCena(stavkaNarudzbeniceDTO.getUkupnaCena());
 
         return stavkaNarudzbenice;

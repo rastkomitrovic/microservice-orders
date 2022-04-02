@@ -14,43 +14,43 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ProizvodMapperTest {
-	
-	@InjectMocks
-	private ProizvodMapper proizvodMapper;
-	
-	@Test
-	public void mapsToDTOCorrectly() {
 
-		Proizvod proizvod = new Proizvod(1,"Proizvod","Tip", JedinicaMere.KOMAD);
+    @InjectMocks
+    private ProizvodMapper proizvodMapper;
 
-		ProizvodDTO proizvodDTO = proizvodMapper.toDTO(proizvod);
+    @Test
+    public void mapsToDTOCorrectly() {
 
-		assertEquals(proizvod.getId(), proizvodDTO.getId());
-		assertEquals(proizvod.getNaziv(), proizvodDTO.getNaziv());
-		assertEquals(proizvod.getTipProizvoda(), proizvodDTO.getTipProizvoda());
-		assertEquals(proizvod.getJedinica(), proizvodDTO.getJedinica());
-	}
-	
-	@Test
-	public void mapsToEntityCorrectly() {
-		
-		ProizvodDTO proizvodDTO = new ProizvodDTO(1,"Proizvod","Tip", JedinicaMere.KOMAD);
+        Proizvod proizvod = new Proizvod(1, "Proizvod", "Tip", JedinicaMere.KOMAD);
 
-		Proizvod proizvod = proizvodMapper.toEntity(proizvodDTO);
+        ProizvodDTO proizvodDTO = proizvodMapper.toDTO(proizvod);
 
-		assertEquals(proizvodDTO.getId(), proizvod.getId());
-		assertEquals(proizvodDTO.getNaziv(), proizvod.getNaziv());
-		assertEquals(proizvodDTO.getTipProizvoda(), proizvod.getTipProizvoda());
-		assertEquals(proizvodDTO.getJedinica(), proizvod.getJedinica());
-	}
+        assertEquals(proizvod.getId(), proizvodDTO.getId());
+        assertEquals(proizvod.getNaziv(), proizvodDTO.getNaziv());
+        assertEquals(proizvod.getTipProizvoda(), proizvodDTO.getTipProizvoda());
+        assertEquals(proizvod.getJedinica(), proizvodDTO.getJedinica());
+    }
 
-	@Test
-	public void returnsNullDTOForNullEntity(){
-		assertNull(proizvodMapper.toDTO(null));
-	}
+    @Test
+    public void mapsToEntityCorrectly() {
 
-	@Test
-	public void returnsNullEntityForNullDTO(){
-		assertNull(proizvodMapper.toEntity(null));
-	}
+        ProizvodDTO proizvodDTO = new ProizvodDTO(1, "Proizvod", "Tip", JedinicaMere.KOMAD);
+
+        Proizvod proizvod = proizvodMapper.toEntity(proizvodDTO);
+
+        assertEquals(proizvodDTO.getId(), proizvod.getId());
+        assertEquals(proizvodDTO.getNaziv(), proizvod.getNaziv());
+        assertEquals(proizvodDTO.getTipProizvoda(), proizvod.getTipProizvoda());
+        assertEquals(proizvodDTO.getJedinica(), proizvod.getJedinica());
+    }
+
+    @Test
+    public void returnsNullDTOForNullEntity() {
+        assertNull(proizvodMapper.toDTO(null));
+    }
+
+    @Test
+    public void returnsNullEntityForNullDTO() {
+        assertNull(proizvodMapper.toEntity(null));
+    }
 }

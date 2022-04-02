@@ -2,8 +2,8 @@ package com.fon.konstrukcije.microservice.orders.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "narudzbenica")
@@ -31,13 +31,13 @@ public class Narudzbenica {
 
     @OneToMany(mappedBy = "id.brojNarudzbenice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("id.rb")
-    private Set<StavkaNarudzbenice> stavkeNarudzbenice;
+    private List<StavkaNarudzbenice> stavkeNarudzbenice;
 
     public Narudzbenica() {
 
     }
 
-    public Narudzbenica(Integer brojNarudzbenice, Klijent klijent, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, Set<StavkaNarudzbenice> stavkeNarudzbenice) {
+    public Narudzbenica(Integer brojNarudzbenice, Klijent klijent, LocalDateTime datumKreiranja, LocalDateTime datumAzuriranja, Double ukupno, List<StavkaNarudzbenice> stavkeNarudzbenice) {
         this.brojNarudzbenice = brojNarudzbenice;
         this.klijent = klijent;
         this.datumKreiranja = datumKreiranja;
@@ -86,11 +86,11 @@ public class Narudzbenica {
         this.ukupno = ukupno;
     }
 
-    public Set<StavkaNarudzbenice> getStavkeNarudzbenice() {
+    public List<StavkaNarudzbenice> getStavkeNarudzbenice() {
         return stavkeNarudzbenice;
     }
 
-    public void setStavkeNarudzbenice(Set<StavkaNarudzbenice> stavkeNarudzbenice) {
+    public void setStavkeNarudzbenice(List<StavkaNarudzbenice> stavkeNarudzbenice) {
         this.stavkeNarudzbenice = stavkeNarudzbenice;
     }
 

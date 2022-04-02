@@ -57,9 +57,9 @@ public class NarudzbeniceFacade {
         for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
             StavkaNarudzbeniceDTO stavka = narudzbenicaDTO.getStavkeNarudzbenice().get(i);
 
-            if (set.contains(stavka.getProizvodDTO().getId()))
+            if (set.contains(stavka.getProizvod().getId()))
                 throw new NarudzbeniceMicroserviceException("Jedan proizvod se moze naci samo uokviru jedne stavke proizvoda");
-            set.add(stavka.getProizvodDTO().getId());
+            set.add(stavka.getProizvod().getId());
 
             stavka.setBrojNarudzbenice(narudzbenicaDTO.getBrojNarudzbenice());
             stavka.setRb(i + 1);
