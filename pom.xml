@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.fon.konstrukcije</groupId>
     <artifactId>Microservice-Orders</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>Microservice-Orders</name>
     <description>Projekat za predmet Konstrukcije softvera</description>
     <properties>

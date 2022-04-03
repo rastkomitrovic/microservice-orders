@@ -8,4 +8,4 @@ COPY  . .
 
 RUN mvn clean verify
 
-ENTRYPOINT ["java","-jar","/app/target/Microservice-Orders-1.0.0.jar"]
+ENTRYPOINT ["java","-jar","/app/target/Microservice-Orders-1.0.1.jar"]
