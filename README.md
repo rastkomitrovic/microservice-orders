@@ -33,7 +33,7 @@ Za stack tehnologija koriscjene su sledece tehnologije:
 Nas mikroservis je primenom Docker-a zapakovan u Docker Image i spreman je da se pokrene
 u bilo kom okruzenju koje ima podesen Docker.
 - Link do repozitorijuma: https://hub.docker.com/repository/docker/rastkomitrovic/microservice-orders
-- Naziv Docker Image-a : rastkomitrovic/microservice-orders:1.0.0
+- Naziv Docker Image-a : rastkomitrovic/microservice-orders:1.0.1
 - Komanda za pokretanje: docker run -p {broj porta koji zelite da gadjate}:9099 rastkomitrovic/microservice-orders:1.0.0
 
 ## Copyright
