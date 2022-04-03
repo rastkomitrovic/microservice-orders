@@ -41,4 +41,4 @@ u bilo kom okruzenju koje ima podesen Docker.
 Autori: Rastko Mitrović i Ivan Ćukić
 Mentor: Tatjana Stojanovic
 
-<img src="" title="Arhitektura Sistema"/>
+<img src="https://github.com/rastkomitrovic/microservice-orders/blob/master/Konstrukcije%20softvera.drawio.png" title="Arhitektura Sistema"/>
