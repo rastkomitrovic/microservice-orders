@@ -13,7 +13,7 @@ import com.fon.konstrukcije.microservice.orders.entity.StavkaNarudzbenice;
 import com.fon.konstrukcije.microservice.orders.entity.embedded.StavkaNarudzbeniceEmbeddedId;
 
 @Service
-public class NarudzbeniceMapper {
+public class NarudzbenicaMapper {
 
     @Resource
     private KlijentMapper klijentMapper;

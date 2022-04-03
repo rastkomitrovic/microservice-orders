@@ -5,13 +5,13 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.mock;
 
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
-import com.fon.konstrukcije.microservice.orders.mapper.NarudzbeniceMapper;
+import com.fon.konstrukcije.microservice.orders.mapper.NarudzbenicaMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import com.fon.konstrukcije.microservice.orders.entity.Narudzbenica;
-import com.fon.konstrukcije.microservice.orders.repository.NarudzbeniceRepository;
+import com.fon.konstrukcije.microservice.orders.repository.NarudzbenicaRepository;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.*;
 
@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class NarudzbeniceServiceTest {
+public class NarudzbenicaServiceTest {
 
     @Mock
-    private NarudzbeniceRepository repository;
+    private NarudzbenicaRepository repository;
 
     @Mock
-    private NarudzbeniceMapper mapper;
+    private NarudzbenicaMapper mapper;
 
     @InjectMocks
     private NarudzbeniceService service;

@@ -1,8 +1,8 @@
 package com.fon.konstrukcije.microservice.orders.rest;
 
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
-import com.fon.konstrukcije.microservice.orders.exception.NarudzbeniceMicroserviceException;
-import com.fon.konstrukcije.microservice.orders.facade.NarudzbeniceFacade;
+import com.fon.konstrukcije.microservice.orders.exception.NarudzbenicaMicroserviceException;
+import com.fon.konstrukcije.microservice.orders.facade.NarudzbenicaFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,21 +13,19 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/api/v0/narudzbenice")
-public class NarudzbeniceRestController {
+public class NarudzbenicaRestController {
 
     @Resource
-    private NarudzbeniceFacade facade;
+    private NarudzbenicaFacade facade;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Sacuvava novu narudzbenicu", responses = {
@@ -35,7 +33,7 @@ public class NarudzbeniceRestController {
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen", content = @Content),
             @ApiResponse(responseCode = "500", description = "Greska na serveru", content = @Content)
     })
-    public ResponseEntity<NarudzbenicaDTO> save(@RequestBody @Valid NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
+    public ResponseEntity<NarudzbenicaDTO> save(@RequestBody @Valid NarudzbenicaDTO narudzbenicaDTO) throws NarudzbenicaMicroserviceException {
         return ResponseEntity.ok(facade.save(narudzbenicaDTO));
     }
 
@@ -45,7 +43,7 @@ public class NarudzbeniceRestController {
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen", content = @Content),
             @ApiResponse(responseCode = "500", description = "Greska na serveru", content = @Content)
     })
-    public ResponseEntity<NarudzbenicaDTO> update(@RequestBody @Valid NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
+    public ResponseEntity<NarudzbenicaDTO> update(@RequestBody @Valid NarudzbenicaDTO narudzbenicaDTO) throws NarudzbenicaMicroserviceException {
         return ResponseEntity.ok(facade.update(narudzbenicaDTO));
     }
 
@@ -58,7 +56,7 @@ public class NarudzbeniceRestController {
             parameters = {
                     @Parameter(name = "brojNarudzbenice", required = true, description = "Broj narudzbenice za pronaci", schema = @Schema(implementation = Integer.class), example = "1")
             })
-    public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable("brojNarudzbenice") Integer brojNarudzbenice) throws NarudzbeniceMicroserviceException {
+    public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable("brojNarudzbenice") Integer brojNarudzbenice) throws NarudzbenicaMicroserviceException {
         return ResponseEntity.ok(facade.findById(brojNarudzbenice));
     }
 
@@ -80,7 +78,7 @@ public class NarudzbeniceRestController {
                     }),
                     @Parameter(name = "search", required = false, description = "Parametar po kom se pretrazuje", schema = @Schema(implementation = String.class), example = "Ivan Cukic")
             })
-    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable("page") Integer page, @PathVariable("size") Integer size, @PathVariable("sortBy") String sortBy, @RequestParam(required = false, defaultValue = "") String search) throws NarudzbeniceMicroserviceException {
+    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable("page") Integer page, @PathVariable("size") Integer size, @PathVariable("sortBy") String sortBy, @RequestParam(required = false, defaultValue = "") String search) throws NarudzbenicaMicroserviceException {
         return ResponseEntity.ok(facade.findPage(page, size, sortBy, search));
     }
 }

@@ -11,7 +11,7 @@ import com.fon.konstrukcije.microservice.orders.dto.KlijentDTO;
 import com.fon.konstrukcije.microservice.orders.dto.ProizvodDTO;
 import com.fon.konstrukcije.microservice.orders.dto.StavkaNarudzbeniceDTO;
 import com.fon.konstrukcije.microservice.orders.entity.eum.JedinicaMere;
-import com.fon.konstrukcije.microservice.orders.exception.NarudzbeniceMicroserviceException;
+import com.fon.konstrukcije.microservice.orders.exception.NarudzbenicaMicroserviceException;
 import com.fon.konstrukcije.microservice.orders.service.NarudzbeniceService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,10 +30,10 @@ public class NarudzbenicaFacadeTest {
     private NarudzbeniceService service;
 
     @InjectMocks
-    private NarudzbeniceFacade facade;
+    private NarudzbenicaFacade facade;
 
     @Test
-    public void savesCorrectly() throws NarudzbeniceMicroserviceException {
+    public void savesCorrectly() throws NarudzbenicaMicroserviceException {
         KlijentDTO klijentDTO = new KlijentDTO();
 
         ProizvodDTO proizvodDTO1 = new ProizvodDTO(1, "Proizvod1", "Tip1", JedinicaMere.KOMAD);
@@ -94,7 +94,7 @@ public class NarudzbenicaFacadeTest {
 
         when(service.findById(narudzbenicaDTO.getBrojNarudzbenice())).thenReturn(Optional.of(narudzbenicaDTOToReturn));
 
-        assertThrowsExactly(NarudzbeniceMicroserviceException.class, () -> facade.save(narudzbenicaDTO), "Vec postoji narudzbenica sa prosledjenim brojem: 1");
+        assertThrowsExactly(NarudzbenicaMicroserviceException.class, () -> facade.save(narudzbenicaDTO), "Vec postoji narudzbenica sa prosledjenim brojem: 1");
     }
 
     @Test
@@ -118,11 +118,11 @@ public class NarudzbenicaFacadeTest {
 
         when(service.findById(narudzbenicaDTO.getBrojNarudzbenice())).thenReturn(Optional.empty());
 
-        assertThrowsExactly(NarudzbeniceMicroserviceException.class, () -> facade.save(narudzbenicaDTO), "Prosledjeni proizvod u stavici se nalazi u vise stavki narudzbenice. Proizvod Id: 1");
+        assertThrowsExactly(NarudzbenicaMicroserviceException.class, () -> facade.save(narudzbenicaDTO), "Prosledjeni proizvod u stavici se nalazi u vise stavki narudzbenice. Proizvod Id: 1");
     }
 
     @Test
-    public void updatesCorrectly() throws NarudzbeniceMicroserviceException {
+    public void updatesCorrectly() throws NarudzbenicaMicroserviceException {
         KlijentDTO klijentDTO = new KlijentDTO();
 
         ProizvodDTO proizvodDTO1 = new ProizvodDTO(1, "Proizvod1", "Tip1", JedinicaMere.KOMAD);
@@ -185,7 +185,7 @@ public class NarudzbenicaFacadeTest {
 
         when(service.findById(narudzbenicaDTO.getBrojNarudzbenice())).thenReturn(Optional.empty());
 
-        assertThrowsExactly(NarudzbeniceMicroserviceException.class, () -> facade.update(narudzbenicaDTO), "Ne postoji narudzbenica sa prosledjenim brojem: 1");
+        assertThrowsExactly(NarudzbenicaMicroserviceException.class, () -> facade.update(narudzbenicaDTO), "Ne postoji narudzbenica sa prosledjenim brojem: 1");
     }
 
     @Test
@@ -209,11 +209,11 @@ public class NarudzbenicaFacadeTest {
 
         when(service.findById(narudzbenicaDTO.getBrojNarudzbenice())).thenReturn(Optional.empty());
 
-        assertThrowsExactly(NarudzbeniceMicroserviceException.class, () -> facade.update(narudzbenicaDTO), "Prosledjeni proizvod u stavici se nalazi u vise stavki narudzbenice. Proizvod Id: 1");
+        assertThrowsExactly(NarudzbenicaMicroserviceException.class, () -> facade.update(narudzbenicaDTO), "Prosledjeni proizvod u stavici se nalazi u vise stavki narudzbenice. Proizvod Id: 1");
     }
 
     @Test
-    public void findsByIdCorrectly() throws NarudzbeniceMicroserviceException {
+    public void findsByIdCorrectly() throws NarudzbenicaMicroserviceException {
         Integer id = 1;
 
         NarudzbenicaDTO narudzbenicaDTO = mock(NarudzbenicaDTO.class);
@@ -227,7 +227,7 @@ public class NarudzbenicaFacadeTest {
     }
 
     @Test
-    public void returnsEmptyForNonExistentId() throws NarudzbeniceMicroserviceException {
+    public void returnsEmptyForNonExistentId() throws NarudzbenicaMicroserviceException {
         Integer id = 1;
 
         when(service.findById(id)).thenReturn(Optional.empty());
@@ -239,7 +239,7 @@ public class NarudzbenicaFacadeTest {
 
 
     @Test
-    public void findsPageWithNullSearchCorrectly() throws NarudzbeniceMicroserviceException {
+    public void findsPageWithNullSearchCorrectly() throws NarudzbenicaMicroserviceException {
         Integer page = 0;
         Integer size = 2;
         String sortBy = "sort";
@@ -263,7 +263,7 @@ public class NarudzbenicaFacadeTest {
     }
 
     @Test
-    public void findsPageWithEmptySearchCorrectly() throws NarudzbeniceMicroserviceException {
+    public void findsPageWithEmptySearchCorrectly() throws NarudzbenicaMicroserviceException {
         Integer page = 0;
         Integer size = 2;
         String sortBy = "sort";
@@ -287,7 +287,7 @@ public class NarudzbenicaFacadeTest {
     }
 
     @Test
-    public void findsPageWithNotNullOrEmptySearchCorrectly() throws NarudzbeniceMicroserviceException {
+    public void findsPageWithNotNullOrEmptySearchCorrectly() throws NarudzbenicaMicroserviceException {
         Integer page = 0;
         Integer size = 2;
         String sortBy = "sort";

@@ -24,7 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class NarudzbeniceMapperTest {
+public class NarudzbenicaMapperTest {
 
     @Mock
     private KlijentMapper klijentMapper;
@@ -33,7 +33,7 @@ public class NarudzbeniceMapperTest {
     private ProizvodMapper proizvodMapper;
 
     @InjectMocks
-    private NarudzbeniceMapper narudzbeniceMapper;
+    private NarudzbenicaMapper narudzbenicaMapper;
 
     @Test
     public void mapsToDTOCorrectly() {
@@ -67,7 +67,7 @@ public class NarudzbeniceMapperTest {
 
         narudzbenica.setStavkeNarudzbenice(stavkeNarudzbenice);
 
-        NarudzbenicaDTO narudzbenicaDTO = narudzbeniceMapper.toDTO(narudzbenica);
+        NarudzbenicaDTO narudzbenicaDTO = narudzbenicaMapper.toDTO(narudzbenica);
 
         assertEquals(narudzbenica.getBrojNarudzbenice(), narudzbenicaDTO.getBrojNarudzbenice());
         assertEquals(klijentDTO, narudzbenicaDTO.getKlijent());
@@ -118,7 +118,7 @@ public class NarudzbeniceMapperTest {
         stavkeNarudzbenice.add(stavkaNarudzbeniceDTO2);
         narudzbenicaDTO.setStavkeNarudzbenice(stavkeNarudzbenice);
 
-        Narudzbenica narudzbenica = narudzbeniceMapper.toEntity(narudzbenicaDTO);
+        Narudzbenica narudzbenica = narudzbenicaMapper.toEntity(narudzbenicaDTO);
 
         assertEquals(narudzbenicaDTO.getBrojNarudzbenice(), narudzbenica.getBrojNarudzbenice());
         assertEquals(klijent, narudzbenica.getKlijent());
@@ -144,11 +144,11 @@ public class NarudzbeniceMapperTest {
 
     @Test
     public void returnsNullDTOForNullEntity() {
-        assertNull(narudzbeniceMapper.toDTO(null));
+        assertNull(narudzbenicaMapper.toDTO(null));
     }
 
     @Test
     public void returnsNullEntityForNullDTO() {
-        assertNull(narudzbeniceMapper.toEntity(null));
+        assertNull(narudzbenicaMapper.toEntity(null));
     }
 }

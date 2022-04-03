@@ -1,8 +1,8 @@
 package com.fon.konstrukcije.microservice.orders.service;
 
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
-import com.fon.konstrukcije.microservice.orders.mapper.NarudzbeniceMapper;
-import com.fon.konstrukcije.microservice.orders.repository.NarudzbeniceRepository;
+import com.fon.konstrukcije.microservice.orders.mapper.NarudzbenicaMapper;
+import com.fon.konstrukcije.microservice.orders.repository.NarudzbenicaRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +17,10 @@ import java.util.Optional;
 public class NarudzbeniceService {
 
     @Resource
-    private NarudzbeniceRepository repository;
+    private NarudzbenicaRepository repository;
 
     @Resource
-    private NarudzbeniceMapper mapper;
+    private NarudzbenicaMapper mapper;
 
 
     public NarudzbenicaDTO save(NarudzbenicaDTO narudzbenicaDTO) {

@@ -1,6 +1,6 @@
 package com.fon.konstrukcije.microservice.orders.config;
 
-import com.fon.konstrukcije.microservice.orders.exception.NarudzbeniceMicroserviceException;
+import com.fon.konstrukcije.microservice.orders.exception.NarudzbenicaMicroserviceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -24,9 +24,9 @@ public class RestControllerAdvice extends ResponseEntityExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(RestControllerAdvice.class);
 
-    @ExceptionHandler(value = {NarudzbeniceMicroserviceException.class})
+    @ExceptionHandler(value = {NarudzbenicaMicroserviceException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<Object> handleNarudzbeniceMicroserviceException(NarudzbeniceMicroserviceException exception, WebRequest webRequest) {
+    protected ResponseEntity<Object> handleNarudzbeniceMicroserviceException(NarudzbenicaMicroserviceException exception, WebRequest webRequest) {
         Map<String, Object> body = new LinkedHashMap<>();
 
         body.put("message", "Greska u zahtevu");
