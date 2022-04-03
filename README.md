@@ -41,4 +41,4 @@ u bilo kom okruzenju koje ima podesen Docker.
 Autori: Rastko Mitrović i Ivan Ćukić
 Mentor: Tatjana Stojanovic
 
-![](/Users/mit1bg/Downloads/Konstrukcije softvera.drawio.png)
+<img src="" title="Arhitektura Sistema"/>
