@@ -37,7 +37,6 @@ public class NarudzbeniceMapperTest {
 
     @Test
     public void mapsToDTOCorrectly() {
-
         Narudzbenica narudzbenica = new Narudzbenica();
         narudzbenica.setBrojNarudzbenice(123);
 
@@ -92,7 +91,6 @@ public class NarudzbeniceMapperTest {
 
     @Test
     public void toEntityTest() {
-
         NarudzbenicaDTO narudzbenicaDTO = new NarudzbenicaDTO();
         narudzbenicaDTO.setBrojNarudzbenice(123);
 
@@ -141,7 +139,7 @@ public class NarudzbeniceMapperTest {
         assertEquals(narudzbenicaDTO.getStavkeNarudzbenice().get(1).getKolicina(), narudzbenica.getStavkeNarudzbenice().get(1).getKolicina());
         assertEquals(narudzbenicaDTO.getStavkeNarudzbenice().get(1).getCena(), narudzbenica.getStavkeNarudzbenice().get(1).getCena());
         assertEquals(narudzbenicaDTO.getStavkeNarudzbenice().get(1).getUkupnaCena(), narudzbenica.getStavkeNarudzbenice().get(1).getUkupnaCena());
-        assertEquals(proizvod2, narudzbenicaDTO.getStavkeNarudzbenice().get(1).getProizvod());
+        assertEquals(proizvod2, narudzbenica.getStavkeNarudzbenice().get(1).getProizvod());
     }
 
     @Test

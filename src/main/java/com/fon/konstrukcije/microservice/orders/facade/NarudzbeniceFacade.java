@@ -7,16 +7,12 @@ import com.fon.konstrukcije.microservice.orders.service.NarudzbeniceService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class NarudzbeniceFacade {
@@ -26,7 +22,7 @@ public class NarudzbeniceFacade {
 
     public NarudzbenicaDTO save(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         if (service.findById(narudzbenicaDTO.getBrojNarudzbenice()).isPresent())
-            throw new NarudzbeniceMicroserviceException("Vec postoji narudzbenica sa unetim Id-om");
+            throw new NarudzbeniceMicroserviceException("Vec postoji narudzbenica sa prosledjenim brojem: " + narudzbenicaDTO.getBrojNarudzbenice());
 
         narudzbenicaDTO.setDatumKreiranja(LocalDateTime.now());
         narudzbenicaDTO.setDatumAzuriranja(null);
@@ -39,12 +35,11 @@ public class NarudzbeniceFacade {
     public NarudzbenicaDTO update(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         Optional<NarudzbenicaDTO> optionalNarudzbenicaDTO = service.findById(narudzbenicaDTO.getBrojNarudzbenice());
         if (!optionalNarudzbenicaDTO.isPresent())
-            throw new NarudzbeniceMicroserviceException("Ne postoji narudzbenica sa prosledjenim id-om");
+            throw new NarudzbeniceMicroserviceException("Ne postoji narudzbenica sa prosledjenim brojem: " + narudzbenicaDTO.getBrojNarudzbenice());
 
         NarudzbenicaDTO narudzbenicaDTOFromDb = optionalNarudzbenicaDTO.get();
         narudzbenicaDTO.setDatumKreiranja(narudzbenicaDTOFromDb.getDatumKreiranja());
         narudzbenicaDTO.setDatumAzuriranja(LocalDateTime.now());
-        narudzbenicaDTO.getStavkeNarudzbenice().forEach(it -> it.setUkupnaCena(it.getCena() * it.getKolicina()));
 
         calculateTotalSumAndSetSingleItemTotalSum(narudzbenicaDTO);
 
@@ -53,12 +48,12 @@ public class NarudzbeniceFacade {
 
     public void calculateTotalSumAndSetSingleItemTotalSum(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbeniceMicroserviceException {
         Double ukupno = 0D;
-        Set<Integer> set = new HashSet<>();
+        List<Integer> set = new LinkedList<>();
         for (int i = 0; i < narudzbenicaDTO.getStavkeNarudzbenice().size(); i++) {
             StavkaNarudzbeniceDTO stavka = narudzbenicaDTO.getStavkeNarudzbenice().get(i);
 
             if (set.contains(stavka.getProizvod().getId()))
-                throw new NarudzbeniceMicroserviceException("Jedan proizvod se moze naci samo uokviru jedne stavke proizvoda");
+                throw new NarudzbeniceMicroserviceException("Prosledjeni proizvod u stavici se nalazi u vise stavki narudzbenice. Proizvod Id: " + stavka.getProizvod().getId());
             set.add(stavka.getProizvod().getId());
 
             stavka.setBrojNarudzbenice(narudzbenicaDTO.getBrojNarudzbenice());
@@ -70,15 +65,12 @@ public class NarudzbeniceFacade {
     }
 
 
-    public Optional<NarudzbenicaDTO> findById(Integer id) {
+    public Optional<NarudzbenicaDTO> findById(Integer id) throws NarudzbeniceMicroserviceException {
         return service.findById(id);
     }
 
 
-    public Page<NarudzbenicaDTO> findPage(Integer page, Integer size, String sortBy, String serach) {
-
-        Pageable paging = PageRequest.of(page, size, Sort.by(sortBy));
-
-        return service.findPage(paging, serach);
+    public Page<NarudzbenicaDTO> findPage(Integer page, Integer size, String sortBy, String search) throws NarudzbeniceMicroserviceException {
+        return service.findPage(PageRequest.of(page, size, Sort.by(sortBy)), search);
     }
 }

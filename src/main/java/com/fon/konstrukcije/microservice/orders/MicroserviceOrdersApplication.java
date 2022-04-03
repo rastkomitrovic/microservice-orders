@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 @SpringBootApplication
 public class MicroserviceOrdersApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MicroserviceOrdersApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MicroserviceOrdersApplication.class, args);
+    }
 
 }

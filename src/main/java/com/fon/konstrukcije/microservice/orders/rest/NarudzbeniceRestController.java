@@ -13,12 +13,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/api/v0/narudzbenice")
@@ -47,7 +49,7 @@ public class NarudzbeniceRestController {
         return ResponseEntity.ok(facade.update(narudzbenicaDTO));
     }
 
-    @GetMapping(value = "/{brojNarudzbenice}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{brojNarudzbenice:^[1-9]+[0-9]*$}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Vraca narudzbenicu sa prosledjenim brojem narudzbenice", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno prosledjena"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
@@ -56,19 +58,19 @@ public class NarudzbeniceRestController {
             parameters = {
                     @Parameter(name = "brojNarudzbenice", required = true, description = "Broj narudzbenice za pronaci", schema = @Schema(implementation = Integer.class), example = "1")
             })
-    public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable Integer brojNarudzbenice) {
+    public ResponseEntity<Optional<NarudzbenicaDTO>> findById(@PathVariable("brojNarudzbenice") Integer brojNarudzbenice) throws NarudzbeniceMicroserviceException {
         return ResponseEntity.ok(facade.findById(brojNarudzbenice));
     }
 
-    @GetMapping(value = "/{page}/{size}/{sort:brojNarudzbenice|klijent|datumKreiranja|datumAzuriranja|ukupno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{page:^0|[1-9]+[0-9]*$}/{size:^[1-9]+[0-9]*$}/{sort:brojNarudzbenice|klijent|datumKreiranja|datumAzuriranja|ukupno}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Vraca narudzbenice po paginaciji po prosledjenom parametru", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno prosledjena"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
             @ApiResponse(responseCode = "500", description = "Greska na serveru")
     },
             parameters = {
-                    @Parameter(name = "page", required = true, description = "Redni broj stranice (krece od 0 pa na dalje)", schema = @Schema(implementation = Integer.class), example = "0"),
-                    @Parameter(name = "size", required = true, description = "Broj elemenata po stranici", schema = @Schema(implementation = Integer.class), example = "2"),
+                    @Parameter(name = "page", required = true, description = "Redni broj stranice (krece se od 0 pa na dalje)", schema = @Schema(implementation = Integer.class), example = "0"),
+                    @Parameter(name = "size", required = true, description = "Broj elemenata po stranici (krece se od 1 pa na vise)", schema = @Schema(implementation = Integer.class), example = "2"),
                     @Parameter(name = "sort", required = true, description = "Polje po kom se sortira", schema = @Schema(implementation = String.class), examples = {
                             @ExampleObject(name = "Broj narudzbenice", value = "brojNarudzbenice", description = "Sortiranje po broju narudzbenice u rastucem redosledu"),
                             @ExampleObject(name = "Klijent", value = "klijent", description = "Sortiranje po ID-u klijenta u rastucem redosledu"),
@@ -78,7 +80,7 @@ public class NarudzbeniceRestController {
                     }),
                     @Parameter(name = "search", required = false, description = "Parametar po kom se pretrazuje", schema = @Schema(implementation = String.class), example = "Ivan Cukic")
             })
-    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable Integer page, @PathVariable Integer size, @PathVariable String sort, @RequestParam(required = false, defaultValue = "") String search) {
+    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable("page") Integer page, @PathVariable("size") Integer size, @PathVariable("sort") String sort, @RequestParam(required = false, defaultValue = "") String search) throws NarudzbeniceMicroserviceException {
         return ResponseEntity.ok(facade.findPage(page, size, sort, search));
     }
 }

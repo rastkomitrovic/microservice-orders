@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class RestControllerAdvice extends ResponseEntityExceptionHandler {
 
-    private Logger logger = LoggerFactory.getLogger(RestControllerAdvice.class);
+    private static final Logger logger = LoggerFactory.getLogger(RestControllerAdvice.class);
 
     @ExceptionHandler(value = {NarudzbeniceMicroserviceException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)

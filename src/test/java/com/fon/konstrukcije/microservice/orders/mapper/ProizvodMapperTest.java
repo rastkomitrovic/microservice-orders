@@ -20,7 +20,6 @@ public class ProizvodMapperTest {
 
     @Test
     public void mapsToDTOCorrectly() {
-
         Proizvod proizvod = new Proizvod(1, "Proizvod", "Tip", JedinicaMere.KOMAD);
 
         ProizvodDTO proizvodDTO = proizvodMapper.toDTO(proizvod);
@@ -33,7 +32,6 @@ public class ProizvodMapperTest {
 
     @Test
     public void mapsToEntityCorrectly() {
-
         ProizvodDTO proizvodDTO = new ProizvodDTO(1, "Proizvod", "Tip", JedinicaMere.KOMAD);
 
         Proizvod proizvod = proizvodMapper.toEntity(proizvodDTO);

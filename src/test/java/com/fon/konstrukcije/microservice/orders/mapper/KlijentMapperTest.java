@@ -18,7 +18,6 @@ public class KlijentMapperTest {
 
     @Test
     public void mapsToDTOCorrectly() {
-
         Klijent klijent = new Klijent(1, "Ime", "Prezime", "Email", "Telefon", "Adresa");
 
         KlijentDTO klijentDTO = klijentMapper.toDTO(klijent);
@@ -33,7 +32,6 @@ public class KlijentMapperTest {
 
     @Test
     public void mapsToEntityCorrectly() {
-
         KlijentDTO klijentDTO = new KlijentDTO(1, "Ime", "Prezime", "Email", "Telefon", "Adresa");
 
         Klijent klijent = klijentMapper.toEntity(klijentDTO);
