@@ -2,12 +2,14 @@ package com.fon.konstrukcije.microservice.orders.dto;
 
 import com.fon.konstrukcije.microservice.orders.entity.eum.JedinicaMere;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class ProizvodDTO {
 
     @NotNull(message = "Id proizvoda ne sme biti null")
+    @Min(value = 1, message = "Id proizvoda mora biti minum 1")
     private Integer id;
 
     private String naziv;

@@ -12,7 +12,7 @@ import com.fon.konstrukcije.microservice.orders.dto.ProizvodDTO;
 import com.fon.konstrukcije.microservice.orders.dto.StavkaNarudzbeniceDTO;
 import com.fon.konstrukcije.microservice.orders.entity.eum.JedinicaMere;
 import com.fon.konstrukcije.microservice.orders.exception.NarudzbenicaMicroserviceException;
-import com.fon.konstrukcije.microservice.orders.service.NarudzbeniceService;
+import com.fon.konstrukcije.microservice.orders.service.NarudzbenicaService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ import org.springframework.data.domain.*;
 public class NarudzbenicaFacadeTest {
 
     @Mock
-    private NarudzbeniceService service;
+    private NarudzbenicaService service;
 
     @InjectMocks
     private NarudzbenicaFacade facade;

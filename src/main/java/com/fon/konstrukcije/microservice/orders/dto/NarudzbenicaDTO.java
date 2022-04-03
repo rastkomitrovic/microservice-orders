@@ -1,5 +1,7 @@
 package com.fon.konstrukcije.microservice.orders.dto;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class NarudzbenicaDTO {
 
     @NotNull(message = "Broj narudzbenice ne sme biti null")
+    @Min(value = 0 , message = "Broj narudzbenice mora biti minimum 0")
     private Integer brojNarudzbenice;
 
     @NotNull(message = "Klijent narudzbenice ne sme biti null")
@@ -22,6 +25,7 @@ public class NarudzbenicaDTO {
 
     @NotNull(message = "Stavke narudzbenice ne smeju biti null")
     @NotEmpty(message = "Narudzbenica mora da ima barem jednu stavku")
+    @Valid
     private List<StavkaNarudzbeniceDTO> stavkeNarudzbenice;
 
 

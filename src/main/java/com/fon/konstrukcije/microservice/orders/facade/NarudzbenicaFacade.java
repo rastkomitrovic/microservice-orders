@@ -3,7 +3,7 @@ package com.fon.konstrukcije.microservice.orders.facade;
 import com.fon.konstrukcije.microservice.orders.dto.NarudzbenicaDTO;
 import com.fon.konstrukcije.microservice.orders.dto.StavkaNarudzbeniceDTO;
 import com.fon.konstrukcije.microservice.orders.exception.NarudzbenicaMicroserviceException;
-import com.fon.konstrukcije.microservice.orders.service.NarudzbeniceService;
+import com.fon.konstrukcije.microservice.orders.service.NarudzbenicaService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +18,7 @@ import java.util.*;
 public class NarudzbenicaFacade {
 
     @Resource
-    private NarudzbeniceService service;
+    private NarudzbenicaService service;
 
     public NarudzbenicaDTO save(NarudzbenicaDTO narudzbenicaDTO) throws NarudzbenicaMicroserviceException {
         if (service.findById(narudzbenicaDTO.getBrojNarudzbenice()).isPresent())

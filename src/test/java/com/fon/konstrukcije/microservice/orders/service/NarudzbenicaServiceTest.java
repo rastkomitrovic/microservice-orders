@@ -29,7 +29,7 @@ public class NarudzbenicaServiceTest {
     private NarudzbenicaMapper mapper;
 
     @InjectMocks
-    private NarudzbeniceService service;
+    private NarudzbenicaService service;
 
 
     @Test

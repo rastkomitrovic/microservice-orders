@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -30,7 +28,7 @@ public class RestControllerAdvice extends ResponseEntityExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
 
         body.put("message", "Greska u zahtevu");
-        body.put("errors", exception.getMessage());
+        body.put("errors", Collections.singletonList(exception.getMessage()));
 
         logger.info("Greska u izvrsavanju " + body, exception);
 
@@ -46,6 +44,7 @@ public class RestControllerAdvice extends ResponseEntityExceptionHandler {
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .distinct()
                 .collect(Collectors.toList());
 
         body.put("message", "Greska u parametrima API poziva");
