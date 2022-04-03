@@ -62,7 +62,7 @@ public class NarudzbeniceRestController {
         return ResponseEntity.ok(facade.findById(brojNarudzbenice));
     }
 
-    @GetMapping(value = "/{page:^0|[1-9]+[0-9]*$}/{size:^[1-9]+[0-9]*$}/{sort:brojNarudzbenice|klijent|datumKreiranja|datumAzuriranja|ukupno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{page:^0|[1-9]+[0-9]*$}/{size:^[1-9]+[0-9]*$}/{sortBy:brojNarudzbenice|klijent|datumKreiranja|datumAzuriranja|ukupno}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Vraca narudzbenice po paginaciji po prosledjenom parametru", responses = {
             @ApiResponse(responseCode = "200", description = "Uspesno prosledjena"),
             @ApiResponse(responseCode = "400", description = "Los zahtev je prosledjen"),
@@ -71,7 +71,7 @@ public class NarudzbeniceRestController {
             parameters = {
                     @Parameter(name = "page", required = true, description = "Redni broj stranice (krece se od 0 pa na dalje)", schema = @Schema(implementation = Integer.class), example = "0"),
                     @Parameter(name = "size", required = true, description = "Broj elemenata po stranici (krece se od 1 pa na vise)", schema = @Schema(implementation = Integer.class), example = "2"),
-                    @Parameter(name = "sort", required = true, description = "Polje po kom se sortira", schema = @Schema(implementation = String.class), examples = {
+                    @Parameter(name = "sortBy", required = true, description = "Polje po kom se sortira", schema = @Schema(implementation = String.class), examples = {
                             @ExampleObject(name = "Broj narudzbenice", value = "brojNarudzbenice", description = "Sortiranje po broju narudzbenice u rastucem redosledu"),
                             @ExampleObject(name = "Klijent", value = "klijent", description = "Sortiranje po ID-u klijenta u rastucem redosledu"),
                             @ExampleObject(name = "Datum kreiranja", value = "datumKreiranja", description = "Sortiranje po datumu kreiranja narudzbine u rastucem redosledu"),
@@ -80,7 +80,7 @@ public class NarudzbeniceRestController {
                     }),
                     @Parameter(name = "search", required = false, description = "Parametar po kom se pretrazuje", schema = @Schema(implementation = String.class), example = "Ivan Cukic")
             })
-    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable("page") Integer page, @PathVariable("size") Integer size, @PathVariable("sort") String sort, @RequestParam(required = false, defaultValue = "") String search) throws NarudzbeniceMicroserviceException {
-        return ResponseEntity.ok(facade.findPage(page, size, sort, search));
+    public ResponseEntity<Page<NarudzbenicaDTO>> findPage(@PathVariable("page") Integer page, @PathVariable("size") Integer size, @PathVariable("sortBy") String sortBy, @RequestParam(required = false, defaultValue = "") String search) throws NarudzbeniceMicroserviceException {
+        return ResponseEntity.ok(facade.findPage(page, size, sortBy, search));
     }
 }
