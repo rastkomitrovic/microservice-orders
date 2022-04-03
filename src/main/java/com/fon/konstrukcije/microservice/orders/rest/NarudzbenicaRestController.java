@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v0/narudzbenice")
+@RequestMapping("/api/v0/narudzbenica")
 public class NarudzbenicaRestController {
 
     @Resource
